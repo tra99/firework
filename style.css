@@ -6,6 +6,7 @@
 
 body, html {
     height: 100%;
+    overflow-y: auto; 
 }
 
 .wrapper {
@@ -13,7 +14,7 @@ body, html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh; 
     text-align: center;
     padding: 10px;
 }
@@ -137,11 +138,6 @@ button.miss-btn {
 
 button.miss-btn:hover {
     background-color: #2ecc71;
-}
-
-body {
-    overflow: hidden;
-    margin: 0;
 }
 
 /* Media Queries for responsiveness */
