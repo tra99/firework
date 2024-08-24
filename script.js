@@ -130,4 +130,3 @@ function startFireworks() {
     window.addEventListener('resize', () => resizeCanvas(canvas, ctx));
     requestAnimationFrame(updateWorld);
 }
-

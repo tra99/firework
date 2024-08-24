@@ -140,7 +140,6 @@ button.miss-btn:hover {
     background-color: #2ecc71;
 }
 
-/* Media Queries for responsiveness */
 @media (max-width: 768px) {
     .container {
         gap: 20px;
