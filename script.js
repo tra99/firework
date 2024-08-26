@@ -3,9 +3,14 @@ document.querySelectorAll('.clickable-image').forEach(image => {
         const clickedImageText = event.target.getAttribute('data-text');
         setCarouselText([clickedImageText]);
         document.getElementById('dialog').style.display = 'block';
-        startFireworks();  
+        if (!fireworksRunning) {
+            startFireworks();
+        }
     });
 });
+
+let fireworksRunning = false;
+let animationFrameId;
 
 function setCarouselText(items) {
     carouselItems = items;
@@ -13,9 +18,10 @@ function setCarouselText(items) {
     updateCarouselText();
 }
 
-
 function closeDialog() {
     document.getElementById('dialog').style.display = 'none';
+    fireworksRunning = false;
+    cancelAnimationFrame(animationFrameId);
 }
 
 function changeText() {
@@ -25,12 +31,6 @@ function changeText() {
 
 let carouselIndex = 0;
 let carouselItems = [];
-
-function setCarouselText(items) {
-    carouselItems = items;
-    carouselIndex = 0;
-    updateCarouselText();
-}
 
 function updateCarouselText() {
     const carouselText = document.getElementById('carousel-text');
@@ -50,6 +50,8 @@ document.getElementById('next-btn').addEventListener('click', () => {
 });
 
 function startFireworks() {
+    fireworksRunning = true;
+
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
     resizeCanvas(canvas, ctx);
@@ -65,7 +67,7 @@ function startFireworks() {
     function updateWorld() {
         update();
         paint();
-        requestAnimationFrame(updateWorld);
+        animationFrameId = requestAnimationFrame(updateWorld); 
     }
 
     function update() {
@@ -128,5 +130,5 @@ function startFireworks() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     window.addEventListener('resize', () => resizeCanvas(canvas, ctx));
-    requestAnimationFrame(updateWorld);
+    animationFrameId = requestAnimationFrame(updateWorld);
 }
